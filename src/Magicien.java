@@ -24,4 +24,9 @@ public class Magicien extends Personnage {
     public void setPhiltre(String philtre) {
         this.philtre = philtre;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + this.sort.toString();
+    }
 }

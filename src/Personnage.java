@@ -29,7 +29,7 @@ public class Personnage {
     }
 
     public String toString(){
-        return "Je suis un " + this.getClass().getSimpleName() + ", je m'appelle " + name + ". Je possède " +vies + "et ma force d'attaque est : " + force;
+        return "Je suis un " + this.getClass().getSimpleName() + ", je m'appelle " + name + ". Je possède " + vies + " vies " + "et ma force d'attaque est : " + force ;
     }
 }
 

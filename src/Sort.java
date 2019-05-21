@@ -22,4 +22,9 @@ public class Sort {
     public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
+
+    @Override
+    public String toString() {
+        return " .J'ai un sort: " + name + "dont le niveau est : " + niveau;
+    }
 }

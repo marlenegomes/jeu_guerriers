@@ -22,4 +22,9 @@ public class Arme {
     public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
+
+    @Override
+    public String toString() {
+        return " .J'ai un(e) " + name + " et son niveau est : " + niveau;
+    }
 }
