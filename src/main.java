@@ -8,6 +8,11 @@ public class main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);//création de l'objet scanner
         int retourMenu = 0;
+
+        Personnage[] listePersonnages; // déclare que le tableau nommé listePersonnages est de type Personnage (objet)
+        listePersonnages = new Personnage[15]; // construit un tableau pour 15 variables de type Personnage(objet)
+        int i = 0;
+
         //creation du menu
         while (retourMenu == 0) {
             System.out.println("Que voulez-vous faire? ");
@@ -18,9 +23,7 @@ public class main {
 
             int poursuiteCreationPersonnage = 0;
             int nbCreationPersonnage = 0;
-            Personnage[] listePersonnages; // déclare que le tableau nommé listePersonnages est de type Personnage (objet)
-            listePersonnages = new Personnage[15]; // construit un tableau pour 15 variables de type Personnage(objet)
-            int i = 0;
+
 
             switch (choix) {
 
@@ -53,10 +56,7 @@ public class main {
                             int niveau = sc.nextInt();
 
                             Arme arme = new Arme(nomArme, niveau);
-
                             listePersonnages[i] = new Guerrier(name, image, viesGuerrier, forceGuerrier, arme);
-
-                            System.out.println();
 
                             System.out.println(listePersonnages[i].toString());
                             i++;
@@ -86,14 +86,19 @@ public class main {
                     break;
                 case 2:
                     System.out.println("afficher les personnages existants : ");
-                    for (int j = 0; i < listePersonnages.length; j++) {
-                        System.out.println(listePersonnages[j]);
+                    for (i = 0; i < listePersonnages.length; i++) {
+                        if (listePersonnages[i] != null) { //si la case du tableau n'est pas null
+                            System.out.print("numéro du personnage = " + i + " | ");
+                            System.out.println(listePersonnages[i].toString());
+                        }
                     }
                     break;
 
                 case 3:
-                    System.out.println("Choisir un personnage");
-                    System.out.println("vous souhaitez :");
+                    System.out.println("Saisissez le numéro du personnage?");
+                    int choixPerso = sc.nextInt();
+
+                    System.out.println("Que souhaitez vous faire? :");
                     System.out.println("1 : afficher toutes ses informations");
                     System.out.println("2 : supprimer ce personnage");
                     System.out.println("3 : modifier ses informations");
@@ -101,18 +106,56 @@ public class main {
 
                     switch (choixAction) {
                         case 1:
-                            System.out.println("les informations : ");
+                            System.out.println("Informations du personnage sélectionné : ");
+                            System.out.println(listePersonnages[choixPerso].toString());
+
                             break;
                         case 2:
 
+                            for (i = 0; i < listePersonnages.length; i++) {
+                                if (i == choixPerso) {
+
+                                    listePersonnages[i] = null;
+                                }
+                            }
+
                             break;
                         case 3:
+
+                            for (i = 0; i < listePersonnages.length; i++) {
+                            if (i == choixPerso) {
+                                System.out.println("que voulez-vous modifier?");
+                                System.out.println("1 : nom");
+                                System.out.println("2 : niveau de vies");
+                                System.out.println("3 : niveau de force");
+                                int choixActionBis = sc.nextInt();
+                                switch (choixActionBis){
+                                    case 1:
+                                        System.out.println("changez le nom: ");
+                                        String nom = sc.next();
+                                        listePersonnages[choixPerso].setName(nom);
+                                        break;
+                                    case 2:
+                                        System.out.println("changez le niveau de vies: ");
+                                        int vies = sc.nextInt();
+                                        listePersonnages[choixPerso].setVies(vies);
+                                        break;
+                                    case 3:
+                                        System.out.println("changez le niveau de force: ");
+                                        int force = sc.nextInt();
+                                        listePersonnages[choixPerso].setForce(force);
+                                        break;
+                                }
+
+                            }
+                        }
                             System.out.println("Modifications : ");
                             break;
                     }
                     break;
 
             }
+
         }
     }
 }

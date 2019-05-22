@@ -28,6 +28,30 @@ public class Personnage {
         this.force = force;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getVies() {
+        return this.vies;
+    }
+
+    public void setVies(int vies) {
+        this.vies = vies;
+    }
+
+    public int getForce() {
+        return this.force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
+    }
+
     public String toString(){
         return "Je suis un " + this.getClass().getSimpleName() + ", je m'appelle " + name + ". Je possède " + vies + " vies " + "et ma force d'attaque est : " + force ;
     }
