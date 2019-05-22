@@ -1,6 +1,23 @@
-
-
-public class Personnage {
+/**
+ * Personnage est la classe représentant un personnage du jeu
+ * Un personnage est caractérisé par les propriétés suivantes:
+ * un nom, qui peut être modifié par l'utilisateur
+ * une image
+ * un niveau de vies, qui peut être modifié par l'utilisateur
+ * un niveau de force, qui peut être modifié par l'utilisateur
+ *
+ *
+ *
+ *
+ *
+ * @author marlenegomes
+ *
+ *
+ */
+public abstract class Personnage {
+    /**
+     * le nom du personnage est modifiable
+     */
 
     private String name;
     private String image;

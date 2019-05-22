@@ -30,6 +30,7 @@ public class Guerrier extends Personnage {
         this.bouclier = bouclier;
     }
 
+
     @Override
     public String toString() {
         return super.toString() + this.arme.toString();
