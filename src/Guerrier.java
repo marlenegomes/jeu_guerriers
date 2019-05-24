@@ -1,25 +1,42 @@
 /**
  * Guerrier est la classe fille de Personnage
  * Un guerrier est caractérisé par:
- * une arme
+
  * un bouclier
  */
 public class Guerrier extends Personnage {
 
     /**
-     * L'arme du guerrier
-     * @see Arme#Arme(String, int)
-     */
-    private Arme arme;
-
-    /**
      * le bouclier du personnage
      */
     private String bouclier;
+    /**
+     * le nombre minimum de vies du personnage. Constante
+     */
+    private final int ViesMin = 5;
 
+    /**
+     * le nombre maximum de vies du personnage. Constante
+     */
+    private final int ViesMax = 10;
+
+    /**
+     * le niveau minimum de force du personnage. Constante
+     */
+    private final int Forcemin = 5;
+
+    /**
+     * le niveau maximum de force du personnage. Constante
+     */
+    private final int ForceMax = 10;
+
+    /**
+     * constructeur par défaut d'un guerrier
+     */
+    public Guerrier() {
+    }
 
     //constructeur 3 avec plusieurs paramètres
-
     /**
      * Constructeur de Guerrier
      *
@@ -31,25 +48,37 @@ public class Guerrier extends Personnage {
      *  Le niveau de vies du guerrier
      * @param force
      *  La force du guerrier
-     * @param arme
+     * @param attaque
      *  L'arme du guerrier
      */
-    public Guerrier(String name, String image, int vies, int force, Arme arme) {
-        super(name, image, vies, force);
-        this.arme = arme;
-
+    public Guerrier(String name, String image, int vies, int force, Attaque attaque){
+            super(name, image, vies, force, attaque);
     }
 
-    public void setArme(Arme arme) {
-        this.arme = arme;
+    @Override
+    public int getMinVies() {
+        return 5;
     }
+
+    @Override
+    public int getMaxVies() {
+        return 10;
+    }
+
+    @Override
+    public int getMinForce() {
+        return 5;
+    }
+
+    @Override
+    public int getMaxForce() {
+        return 10;
+    }
+
+
 
     public void setBouclier(String bouclier) {
         this.bouclier = bouclier;
-    }
-
-    public Arme getArme() {
-        return this.arme;
     }
 
     public String getBouclier() {
@@ -62,6 +91,9 @@ public class Guerrier extends Personnage {
      */
     @Override
     public String toString() {
-        return super.toString() + this.arme.toString();
+        return super.toString() + getAttaque().toString();
     }
+
+
+
 }

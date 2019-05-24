@@ -5,16 +5,22 @@
  * un philtre
  */
 public class Magicien extends Personnage {
-    /**
-     * Le sort du magicien
-     * @see Sort#Sort(String, int)
-     */
-    private Sort sort;
 
     /**
      * le philtre du magicien
      */
     private String philtre;
+
+    private final int ViesMin = 3;
+    private final int ViesMax = 6;
+    private final int Forcemin = 8;
+    private final int ForceMax = 15;
+
+    /**
+     * contructeur par défaut d'un magicien
+     */
+    public Magicien() {
+    }
 
     /**
      * Constructeur de magicien
@@ -28,37 +34,50 @@ public class Magicien extends Personnage {
      *  le nouveau de vies du magicien
      * @param force
      *  La nouvelle force du magicien
-     * @param sort
-     *  le nouveau sort du magicien
+     * @param attaque
+     *  la nouvelle attaque du magicien
      */
-    public Magicien(String name, String image, int vies, int force, Sort sort) {
-        //super : pour faire appel aux attributs de la classe mère personnage
-        super(name,image, vies, force);
-        this.sort = sort;
-    }
+    public Magicien(String name, String image, int vies, int force, Attaque attaque) {
+        super(name, image, vies, force, attaque);
 
-    public Sort getSort() {
-        return this.sort;
-    }
+        }
 
-    public void setSort(Sort sort) {
-        this.sort = sort;
-    }
+        @Override
+        public int getMinVies () {
+            return 3;
+        }
 
-    public String getPhiltre() {
-        return this.philtre;
-    }
+        @Override
+        public int getMaxVies () {
+            return 6;
+        }
 
-    public void setPhiltre(String philtre) {
-        this.philtre = philtre;
-    }
+        @Override
+        public int getMinForce () {
+            return 8;
+        }
 
-    /**
-     * décrit le guerrier créé
-     * @return une chaine de caractères servant à décrire le guerrier
-     */
-    @Override
-    public String toString() {
-        return super.toString() + this.sort.toString();
+        @Override
+        public int getMaxForce () {
+            return 15;
+        }
+
+        public String getPhiltre () {
+            return this.philtre;
+        }
+
+        public void setPhiltre (String philtre){
+            this.philtre = philtre;
+        }
+
+        /**
+         * décrit le guerrier créé
+         * @return une chaine de caractères servant à décrire le guerrier
+         */
+        @Override
+        public String toString () {
+            return super.toString() + getAttaque().toString();
+        }
+
+
     }
-}

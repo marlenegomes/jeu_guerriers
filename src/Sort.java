@@ -4,17 +4,13 @@
  * un nom
  * un niveau
  */
-public class Sort {
+public class Sort extends Attaque {
 
     /**
-     * Le nom du sort
+     * constructeur par défaut d'un sort
      */
-    private String name;
-
-    /**
-     * le niveau du sort
-     */
-    private int niveau;
+    public Sort() {
+    }
 
     /**
      * Constructeur d'un sort
@@ -25,25 +21,9 @@ public class Sort {
      *  le niveau du sort
      */
     public Sort (String name, int niveau){
-        this.name = name;
-        this.niveau = niveau;
+       super(name,niveau);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getNiveau() {
-        return this.niveau;
-    }
-
-    public void setNiveau(int niveau) {
-        this.niveau = niveau;
-    }
 
     /**
      * décrit le sort créé
@@ -51,6 +31,6 @@ public class Sort {
      */
     @Override
     public String toString() {
-        return " .J'ai un sort: " + name + "dont le niveau est : " + niveau;
+        return super.toString();
     }
 }
