@@ -114,7 +114,7 @@ public abstract class Personnage {
      */
     public void setVies(int vies) throws PersonnageException {
         if (vies < this.getMinVies() || vies > this.getMaxVies()) {
-            throw new PersonnageException("Le niveau de vies doit être compris entre [" + this.getMinVies() + "," + this.getMaxVies() + "]");
+            throw new PersonnageException("Le niveau de vies doit être compris entre [" + this.getMinVies() + "," + this.getMaxVies() + "]. Saisissez à nouveau:");
         }
         this.vies = vies;
     }
@@ -136,7 +136,7 @@ public abstract class Personnage {
      */
     public void setForce(int force) throws PersonnageException {
         if (force < this.getMinForce() || force > this.getMaxForce()) {
-            throw new PersonnageException("La force doit être comprise entre [" + this.getMinForce() + "," + this.getMaxForce() + "]");
+            throw new PersonnageException("La force doit être comprise entre [" + this.getMinForce() + "," + this.getMaxForce() + "]. Saisissez à nouveau:");
         }
         this.force = force;
     }
