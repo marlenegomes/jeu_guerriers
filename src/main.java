@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,8 +10,7 @@ public class main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);//création de l'objet scanner
         int retourMenu = 0;
-        Personnage[] listePersonnages; // déclare que le tableau nommé listePersonnages est de type Personnage (objet)
-        listePersonnages = new Personnage[15]; // construit un tableau pour 15 variables de type Personnage(objet)
+        ArrayList<Personnage> listePersonnages = new ArrayList<Personnage>(); // création d'un objet arraylist
 
         int nbCreationPersonnage = 0; // index tableau listePersonnages
         int choix = 0;
@@ -44,7 +44,7 @@ public class main {
     }
 
 
-    private static int executeAction(Scanner sc, Personnage[] listePersonnages, int nbCreationPersonnage, int choix) {
+    private static int executeAction(Scanner sc, ArrayList<Personnage> listePersonnages, int nbCreationPersonnage, int choix) {
         switch (choix) {
             case 1:
                 return createPersonnage(sc, listePersonnages, nbCreationPersonnage);
@@ -56,7 +56,7 @@ public class main {
         return nbCreationPersonnage;
     }
 
-    private static int choosePersonnage(Scanner sc, Personnage[] listePersonnages, int nbCreationPersonnage) {
+    private static int choosePersonnage(Scanner sc, ArrayList<Personnage> listePersonnages, int nbCreationPersonnage) {
         System.out.println("Saisissez le numéro du personnage?");
         int choixPerso = SaisirUnEntier(sc);
 
@@ -69,42 +69,36 @@ public class main {
         switch (choixAction) {
             case 1://affichage Personnage
                 System.out.println("Informations du personnage sélectionné : ");
-                System.out.println(listePersonnages[choixPerso].toString());
+                System.out.println(listePersonnages.get(choixPerso).toString());
                 break;
             case 2://suppression personnage
-                for (nbCreationPersonnage = 0; nbCreationPersonnage < listePersonnages.length; nbCreationPersonnage++) {
-                    if (nbCreationPersonnage == choixPerso) {
-                        listePersonnages[nbCreationPersonnage] = null;
-                    }
-                }
+                listePersonnages.remove(choixPerso);
+
                 break;
             case 3://modification Personnage
                 try {
-                    for (nbCreationPersonnage = 0; nbCreationPersonnage < listePersonnages.length; nbCreationPersonnage++) {
-                        if (nbCreationPersonnage == choixPerso) {
-                            System.out.println("que voulez-vous modifier?");
-                            System.out.println("1 : nom");
-                            System.out.println("2 : niveau de vies");
-                            System.out.println("3 : niveau de force");
-                            int choixActionBis = SaisirUnEntier(sc);
-                            switch (choixActionBis) {
-                                case 1:
-                                    System.out.println("changez le nom: ");
-                                    String nom = sc.next();
-                                    listePersonnages[choixPerso].setName(nom);
-                                    break;
-                                case 2:
-                                    System.out.println("changez le niveau de vies: ");
-                                    int vies = SaisirUnEntier(sc);
-                                    listePersonnages[choixPerso].setVies(vies);
-                                    break;
-                                case 3:
-                                    System.out.println("changez le niveau de force: ");
-                                    int force = SaisirUnEntier(sc);
-                                    listePersonnages[choixPerso].setForce(force);
-                                    break;
-                            }
-                        }
+
+                    System.out.println("que voulez-vous modifier?");
+                    System.out.println("1 : nom");
+                    System.out.println("2 : niveau de vies");
+                    System.out.println("3 : niveau de force");
+                    int choixActionBis = SaisirUnEntier(sc);
+                    switch (choixActionBis) {
+                        case 1:
+                            System.out.println("changez le nom: ");
+                            String nom = sc.next();
+                            listePersonnages.get(choixPerso).setName(nom);
+                            break;
+                        case 2:
+                            System.out.println("changez le niveau de vies: ");
+                            int vies = SaisirUnEntier(sc);
+                            listePersonnages.get(choixPerso).setVies(vies);
+                            break;
+                        case 3:
+                            System.out.println("changez le niveau de force: ");
+                            int force = SaisirUnEntier(sc);
+                            listePersonnages.get(choixPerso).setForce(force);
+                            break;
                     }
                 } catch (PersonnageException e) {
                     System.err.println(e.getMessage());
@@ -114,19 +108,19 @@ public class main {
         return nbCreationPersonnage;
     }
 
-    private static int displayPersonnages(Personnage[] listePersonnages) {
+    private static int displayPersonnages(ArrayList<Personnage> listePersonnages) {
         int nbCreationPersonnage;
         System.out.println("afficher les personnages existants : ");
-        for (nbCreationPersonnage = 0; nbCreationPersonnage < listePersonnages.length; nbCreationPersonnage++) {
-            if (listePersonnages[nbCreationPersonnage] != null) { //si la case du tableau n'est pas null
+        for (nbCreationPersonnage = 0; nbCreationPersonnage < listePersonnages.size(); nbCreationPersonnage++) {
+            if (listePersonnages.get(nbCreationPersonnage) != null) { //si la case du tableau n'est pas null
                 System.out.print("numéro du personnage = " + nbCreationPersonnage + " | ");
-                System.out.println(listePersonnages[nbCreationPersonnage].toString());
+                System.out.println(listePersonnages.get(nbCreationPersonnage).toString());
             }
         }
         return nbCreationPersonnage;
     }
 
-    private static int createPersonnage(Scanner sc, Personnage[] listePersonnages, int nbCreationPersonnage) {
+    private static int createPersonnage(Scanner sc, ArrayList listePersonnages, int nbCreationPersonnage) {
         System.out.println("création du personnage " + (nbCreationPersonnage + 1));
         System.out.println("Saisissez un type de personnage (1: guerrier ou 2: magicien)");
 
@@ -194,7 +188,8 @@ public class main {
             p.setAttaque(a);
 
             System.out.println(p);
-            listePersonnages[nbCreationPersonnage] = p;
+            listePersonnages.add(p);
+            //listePersonnages[nbCreationPersonnage] = p;
             nbCreationPersonnage++;
 
         } catch (PersonnageException e2) {
