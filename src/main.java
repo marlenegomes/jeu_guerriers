@@ -12,6 +12,14 @@ public class main {
         int retourMenu = 0;
         ArrayList<Personnage> listePersonnages = new ArrayList<Personnage>(); // création d'un objet arraylist
 
+        //création du plateau
+        ArrayList<Case> plateau = new ArrayList<Case>();
+        for (int i = 0; i < 10; i++) {
+            String evenement = chooseEvenement(); // choix de l'evenement
+            Case aCase = new Case(evenement);//création d'une case
+            plateau.add(aCase);
+        }
+
         int nbCreationPersonnage = 0; // index tableau listePersonnages
         int choix = 0;
 
@@ -24,6 +32,16 @@ public class main {
             retourMenu = sc.nextInt();
         }
     }
+// fct qui aleatoirement un evenement à partir d'un tableau de chaines de caractères
+    private static String chooseEvenement() {
+        String evenement[] = new String[3];
+
+        evenement[0] = "rien";
+        evenement[1] = "bonus";
+        evenement[2] = "ennemi";
+
+        return evenement[(int) (Math.random() * evenement.length)];
+    }
 
 
     private static int chooseAction(Scanner sc, int choix) {
@@ -32,6 +50,7 @@ public class main {
         System.out.println("1 : créer un personnage");
         System.out.println("2 : lister tous les personnages existants");
         System.out.println("3 : choisir un personnage");
+        System.out.println("4 : Jouer");
         //gestion d'exception
         try {
             choix = sc.nextInt();
@@ -163,7 +182,6 @@ public class main {
 
             try {
                 p.setForce(force);
-
             } catch (PersonnageException e) {
                 System.err.println(e.getMessage());
             }
@@ -189,7 +207,6 @@ public class main {
 
             System.out.println(p);
             listePersonnages.add(p);
-            //listePersonnages[nbCreationPersonnage] = p;
             nbCreationPersonnage++;
 
         } catch (PersonnageException e2) {
@@ -204,4 +221,6 @@ public class main {
         sc.nextLine();
         return choix;
     }
+
+
 }
